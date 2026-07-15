@@ -1,0 +1,24 @@
+# Output Excel hasil proses
+output/*.xlsx
+
+# Log files
+logs/*.log
+
+# File Excel input (jangan commit data sensitif)
+data/daftar_lo.xlsx
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
