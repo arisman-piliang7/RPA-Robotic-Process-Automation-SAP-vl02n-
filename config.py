@@ -26,11 +26,16 @@ def load_config(config_path: str = CONFIG_FILE) -> configparser.ConfigParser:
 
 def get_sap_config(config: configparser.ConfigParser) -> dict:
     """Mengembalikan konfigurasi SAP sebagai dictionary."""
+    password = os.environ.get("SAP_PASSWORD") or config.get("SAP", "password", fallback="")
+    if not password:
+        raise ValueError(
+            "Password SAP tidak ditemukan. Set environment variable SAP_PASSWORD."
+        )
     return {
         "system_name": config.get("SAP", "system_name"),
         "client": config.get("SAP", "client"),
         "username": os.environ.get("SAP_USERNAME") or config.get("SAP", "username"),
-        "password": os.environ.get("SAP_PASSWORD") or config.get("SAP", "password"),
+        "password": password,
         "language": config.get("SAP", "language"),
     }
 

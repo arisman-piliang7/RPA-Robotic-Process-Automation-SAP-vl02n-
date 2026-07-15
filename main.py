@@ -17,6 +17,7 @@ import time
 from datetime import datetime
 
 import pandas as pd
+from openpyxl.styles import numbers as xl_numbers
 
 from config import load_config, get_sap_config, get_file_config, get_settings
 from hapus_lo import (
@@ -96,10 +97,9 @@ def simpan_hasil(hasil_list: list, output_file: str) -> None:
         workbook = writer.book
         worksheet = writer.sheets["Hasil"]
         # Atur format kolom nomor_lo sebagai teks
-        from openpyxl.styles import numbers as xl_numbers
-        for row in worksheet.iter_rows(min_row=2, min_col=1, max_col=1):
-            for cell in row:
-                cell.number_format = "@"
+        for cell in worksheet.iter_cols(min_row=2, min_col=1, max_col=1, values_only=False):
+            for c in cell:
+                c.number_format = "@"
     logging.info("Hasil disimpan ke: %s", output_file)
 
 

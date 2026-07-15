@@ -15,6 +15,17 @@ STATUS_GAGAL = "GAGAL"
 STATUS_TIDAK_DITEMUKAN = "TIDAK DITEMUKAN"
 STATUS_SIMULASI = "SIMULASI"
 
+# Kata kunci dalam pesan status SAP yang menandakan keberhasilan penghapusan
+SUCCESS_KEYWORDS = [
+    "saved",
+    "disimpan",
+    "deletion flag",
+    "tanda hapus",
+    "berhasil",
+    "successfully",
+    "gesetzt",
+]
+
 
 def hubungkan_sap(system_name: str) -> object:
     """
@@ -67,7 +78,7 @@ def login_sap(
         session.findById("wnd[0]/usr/txtRSYST-LANGU").Text = language
         session.findById("wnd[0]").sendVKey(0)
 
-        logger.info("Login SAP berhasil sebagai user: %s", username)
+        logger.info("Login SAP berhasil.")
         return session
     except Exception as exc:
         raise RuntimeError(f"Login SAP gagal: {exc}") from exc
@@ -210,17 +221,8 @@ def _konfirmasi_dialog(session: object, delay: float) -> None:
 
 def _cek_berhasil(pesan_sap: str) -> bool:
     """Memeriksa apakah pesan status SAP menunjukkan keberhasilan."""
-    kata_berhasil = [
-        "saved",
-        "disimpan",
-        "deletion flag",
-        "tanda hapus",
-        "berhasil",
-        "successfully",
-        "gesetzt",
-    ]
     pesan_lower = pesan_sap.lower()
-    return any(kata in pesan_lower for kata in kata_berhasil)
+    return any(kata in pesan_lower for kata in SUCCESS_KEYWORDS)
 
 
 def logout_sap(session: object) -> None:
