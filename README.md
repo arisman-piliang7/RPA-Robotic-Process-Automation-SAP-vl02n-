@@ -58,9 +58,9 @@ Salin dan sesuaikan file `config.ini`:
 [SAP]
 system_name = PRD          ; Nama sistem di SAP Logon Pad
 client      = 300          ; Nomor client SAP
-username    = USERNAME     ; Username SAP
-password    = PASSWORD     ; Password (lebih aman gunakan env variable)
+username    = USERNAME     ; Username SAP (atau set env var SAP_USERNAME)
 language    = ID           ; Bahasa (ID = Indonesia)
+; password tidak dicantumkan di sini — wajib menggunakan env var SAP_PASSWORD
 
 [FILE]
 input_file    = data/daftar_lo.xlsx   ; File daftar LO (xlsx atau csv)

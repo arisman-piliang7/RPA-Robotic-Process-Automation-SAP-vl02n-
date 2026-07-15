@@ -138,9 +138,7 @@ def hapus_satu_lo(
 
         # Masukkan nomor LO (Outbound Delivery Number)
         try:
-            session.findById(
-                "wnd[0]/usr/ctxtLIKP-VBELN"
-            ).Text = nomor_lo
+            session.findById("wnd[0]/usr/ctxtLIKP-VBELN").Text = nomor_lo
         except Exception:
             hasil["status"] = STATUS_TIDAK_DITEMUKAN
             hasil["pesan"] = f"Field nomor LO tidak ditemukan di layar VL02N."

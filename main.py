@@ -97,9 +97,8 @@ def simpan_hasil(hasil_list: list, output_file: str) -> None:
         workbook = writer.book
         worksheet = writer.sheets["Hasil"]
         # Atur format kolom nomor_lo sebagai teks
-        for cell in worksheet.iter_cols(min_row=2, min_col=1, max_col=1, values_only=False):
-            for c in cell:
-                c.number_format = "@"
+        for cell in worksheet["A"][1:]:
+            cell.number_format = "@"
     logging.info("Hasil disimpan ke: %s", output_file)
 
 
